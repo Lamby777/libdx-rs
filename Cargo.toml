@@ -1,0 +1,13 @@
+[package]
+name = "libdx"
+version = "0.1.0"
+edition = "2021"
+license = "GPL-3.0"
+description = "High-level virtual machine experiment"
+homepage = "https://sparklet.org/libdx/"
+repository = "https://github.com/Lamby777/libdx-rs/"
+keywords = ["virtual-machine", "vm"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
