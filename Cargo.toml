@@ -1,9 +1,9 @@
 [package]
 name = "libdx"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 license = "GPL-3.0"
-description = "High-level virtual machine experiment"
+description = "Stuff that should probably already be a part of Rust."
 homepage = "https://sparklet.org/libdx/"
 repository = "https://github.com/Lamby777/libdx-rs/"
 keywords = ["virtual-machine", "vm"]
