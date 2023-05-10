@@ -4,11 +4,16 @@
 */
 
 use std::error::Error;
+use std::{thread, time};
 use rand::seq::SliceRandom;
 use rand::thread_rng;
 
 pub type Result<T, E = Box<dyn Error>> = core::result::Result<T, E>;
 pub type SyncResult<T, E = Box<dyn Error + Send + Sync>> = Result<T, E>;
+
+pub fn sleep(len: u64) {
+	thread::sleep(time::Duration::from_millis(len));
+}
 
 pub fn choose_rand<T: Copy, V: AsRef<[T]>>(v: V) -> Option<T> {
 	v.as_ref().choose(&mut thread_rng()).map(|value| *value)
