@@ -5,6 +5,7 @@
 
 use std::error::Error;
 use std::{thread, time};
+use std::collections::{BTreeMap, BTreeSet, HashMap, HashSet};
 use rand::seq::SliceRandom;
 use rand::thread_rng;
 
@@ -27,4 +28,22 @@ macro_rules! foreach {
 			$(logic($arg);)+
 		}
 	};
+}
+
+/// Praise Shepmaster
+/// https://stackoverflow.com/a/27582993/8149876
+///
+/// ```
+/// use libdx::map;
+/// let r =	map! { "name" => "Sheep" };
+/// assert_eq!(r.get("name"), "Sheep");
+/// ```
+macro_rules! map {
+    ($($k:expr => $v:expr),* $(,)?) => {{
+        core::convert::From::from([$(($k, $v),)*])
+    }};
+	
+    ($($v:expr),* $(,)?) => {{
+        core::convert::From::from([$($v,)*])
+    }};
 }
