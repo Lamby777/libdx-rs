@@ -32,12 +32,6 @@ macro_rules! foreach {
 
 /// Praise Shepmaster
 /// https://stackoverflow.com/a/27582993/8149876
-///
-/// ```
-/// use libdx::map;
-/// let r =	map! { "name" => "Sheep" };
-/// assert_eq!(r.get("name"), "Sheep");
-/// ```
 macro_rules! map {
     ($($k:expr => $v:expr),* $(,)?) => {{
         core::convert::From::from([$(($k, $v),)*])
