@@ -4,16 +4,17 @@
 */
 
 use std::error::Error;
-use std::{thread, time};
-use std::collections::{BTreeMap, BTreeSet, HashMap, HashSet};
 use rand::seq::SliceRandom;
 use rand::thread_rng;
 
 pub type Result<T, E = Box<dyn Error>> = core::result::Result<T, E>;
 pub type SyncResult<T, E = Box<dyn Error + Send + Sync>> = Result<T, E>;
 
-pub fn sleep(len: u64) {
-	thread::sleep(time::Duration::from_millis(len));
+#[macro_export]
+macro_rules! sleep {
+    ($len:expr) => {
+        thread::sleep(time::Duration::from_millis($len));
+    };
 }
 
 pub fn choose_rand<T: Copy, V: AsRef<[T]>>(v: V) -> Option<T> {
@@ -32,6 +33,7 @@ macro_rules! foreach {
 
 /// Praise Shepmaster
 /// https://stackoverflow.com/a/27582993/8149876
+#[macro_export]
 macro_rules! map {
     ($($k:expr => $v:expr),* $(,)?) => {{
         core::convert::From::from([$(($k, $v),)*])
