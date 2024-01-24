@@ -38,36 +38,31 @@ macro_rules! foreach {
 	};
 }
 
-/// Like `foreach!`, but allows you to "iterate" over
-/// identifiers, running your logic on a `&dyn T` trait
-/// object for each one.
+/// Run a static method on each type provided.
 ///
 /// # Example
 /// ```
-/// # use libdx::foreach_dyn;
+/// # use libdx::foreach_static;
 /// struct Foo;
 /// struct Bar;
-/// struct Baz;
 ///
 /// trait Quacks {
-///     fn quack(&self) { println!("Quack!"); }
+///     fn static_quack() { println!("Quack!"); }
 /// }
 ///
 /// impl Quacks for Foo {};
 /// impl Quacks for Bar {};
-/// impl Quacks for Baz {};
 ///
-/// foreach_dyn!([Foo, Bar, Baz] => |x: &dyn Quacks| x.quack());
+/// foreach_static!([Foo, Bar] => Quacks, static_quack);
 /// ```
 ///
 #[macro_export]
-macro_rules! foreach_dyn {
-	([$($arg:ident),+] => $logic:expr) => {
-		{
-			let mut logic = {$logic};
-			$(logic(&$arg);)+
-		}
-	};
+macro_rules! foreach_static {
+    ([$($arg:ident),+] => $trait:ident, $method:ident) => {
+        {
+            $(<$arg as $trait>::$method();)+
+        }
+    };
 }
 
 /// Praise Shepmaster
