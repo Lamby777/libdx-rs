@@ -30,7 +30,7 @@ pub fn choose_rand<T: Copy, V: AsRef<[T]>>(v: V) -> Option<T> {
 /// ```
 #[macro_export]
 macro_rules! foreach {
-	([$($arg:expr),+] => $logic:expr) => {
+	([$($arg:expr),+ $(,)?] => $logic:expr) => {
 		{
 			let mut logic = {$logic};
 			$(logic($arg);)+
@@ -58,7 +58,7 @@ macro_rules! foreach {
 ///
 #[macro_export]
 macro_rules! foreach_static {
-    ([$($arg:ident),+] => $trait:ident, $method:ident) => {
+    ([$($arg:ident),+ $(,)?] => $trait:ident, $method:ident) => {
         {
             $(<$arg as $trait>::$method();)+
         }
